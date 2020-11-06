@@ -22,12 +22,17 @@ public class PolicyHandler{
 
         if(reserved.isMe()){
             Confirm confirm = new Confirm();
-            confirm.setReserveId(reserved.getResortId());
+            confirm.setReserveId(String.valueOf(reserved.getId()));
             confirm.setResortId(reserved.getResortId());
             confirm.setRoomId(reserved.getRoomId());
             confirm.setPeopleCount(reserved.getPeopleCount());
             confirm.setStatus("WaitConfirm");
-            System.out.println("##### listener WaitReservation : " + reserved.toJson());
+            confirmRepository.save(confirm);
+            System.out.println("##### listener WaitReservation : " + reserved.toJson() + " " + reserved.getResortId()
+                    + " " + reserved.getResortId()
+                    + " " + reserved.getRoomId()
+                    + " " + reserved.getPeopleCount()
+            );
         }
     }
 

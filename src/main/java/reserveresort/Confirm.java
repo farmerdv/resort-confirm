@@ -20,14 +20,15 @@ public class Confirm {
     private Integer peopleCount;
     private String status;
 
-    @PostPersist
-    public void onPostPersist(){
-        Confimed confimed = new Confimed();
-        confimed.setStatus("Confirmed");
-        BeanUtils.copyProperties(this, confimed);
-        confimed.publishAfterCommit();
+    @PostUpdate
+    public void onPostUpdate(){
+        if("Confirmed".equals(this.status)){
+            Confimed confimed = new Confimed();
+            confimed.setStatus("Confirmed");
+            BeanUtils.copyProperties(this, confimed);
+            confimed.publishAfterCommit();
+        }
     }
-
 
     public Long getId() {
         return id;
